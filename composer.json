@@ -1,0 +1,16 @@
+{
+    "name": "course-scraper/mindluster",
+    "description": "Course scraper for Mindluster platform",
+    "type": "project",
+    "require": {
+        "php": ">=7.4",
+        "ext-curl": "*",
+        "ext-dom": "*",
+        "ext-libxml": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "CourseScraper\\": "includes/"
+        }
+    }
+} 
