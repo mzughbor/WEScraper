@@ -2,6 +2,8 @@
 <?php
 
 require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/includes/scraper.php';  // Temporary direct include
+
 
 // Load configuration
 $config = require_once __DIR__ . '/includes/scraper-config.php';

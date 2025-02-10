@@ -76,12 +76,17 @@ class MindLusterScraper {
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $login_data);
         
-        // Add additional headers for POST request
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array_merge([
+        // Set headers for POST request
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Content-Type: application/x-www-form-urlencoded',
             'Origin: https://www.mindluster.com',
-            'Referer: https://www.mindluster.com/login'
-        ], curl_getinfo($ch, CURLINFO_HTTPHEADER)));
+            'Referer: https://www.mindluster.com/login',
+            'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+            'Accept-Language: en-US,en;q=0.5',
+            'Accept-Encoding: gzip, deflate, br',
+            'Connection: keep-alive',
+            'Upgrade-Insecure-Requests: 1'
+        ]);
 
         $response = curl_exec($ch);
         $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
