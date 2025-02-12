@@ -2,47 +2,37 @@
 <?php
 
 require_once __DIR__ . '/vendor/autoload.php';
-require_once __DIR__ . '/includes/scraper.php';  // Temporary direct include
-
-
-// Load configuration
-$config = require_once __DIR__ . '/includes/scraper-config.php';
+require_once __DIR__ . '/includes/scraper.php';
 
 // Parse command line arguments
-$options = getopt('', ['url:', 'email:', 'password:']);
+$options = getopt('', ['url:', 'xsrf-token:', 'laravel-session:', 'fcnec::']);
 
 $url = $options['url'] ?? null;
-$email = $options['email'] ?? $config['credentials']['email'];
-$password = $options['password'] ?? $config['credentials']['password'];
+$xsrf_token = $options['xsrf-token'] ?? null;
+$laravel_session = $options['laravel-session'] ?? null;
+$fcnec = $options['fcnec'] ?? '';
 
-if (!$url) {
-    echo "Usage: php scrape.php --url=<course_url> [--email=<email> --password=<password>]\n";
+if (!$url || !$xsrf_token || !$laravel_session) {
+    echo "Usage: php scrape.php --url=<course_url> --xsrf-token=<token> --laravel-session=<session> [--fcnec=<fcnec>]\n";
     exit(1);
 }
 
 try {
     echo "Starting scraper...\n";
     
-    $scraper = new MindLusterScraper($email, $password);
+    $scraper = new MindLusterScraper($xsrf_token, $laravel_session, $fcnec);
     
-    echo "Logging in...\n";
-    if ($scraper->login()) {
-        echo "Login successful!\n";
-        echo "Scraping course data...\n";
-        
-        $course_data = $scraper->scrapeCourse($url);
-        
-        // Save to JSON file
-        $output_file = 'course_data_' . date('Y-m-d_H-i-s') . '.json';
-        file_put_contents($output_file, json_encode($course_data, JSON_PRETTY_PRINT));
-        
-        echo "\nScraping completed successfully!\n";
-        echo "Data saved to: $output_file\n";
-    } else {
-        echo "Login failed! Please check your credentials.\n";
-        exit(1);
-    }
+    echo "Scraping course data...\n";
+    $course_data = $scraper->scrapeCourse($url);
+    
+    // Save to JSON file
+    $output_file = 'course_data_' . date('Y-m-d_H-i-s') . '.json';
+    file_put_contents($output_file, json_encode($course_data, JSON_PRETTY_PRINT));
+    
+    echo "\nScraping completed successfully!\n";
+    echo "Data saved to: $output_file\n";
+    
 } catch (Exception $e) {
     echo "Error: " . $e->getMessage() . "\n";
-    exit(1); 
+    exit(1);
 }
