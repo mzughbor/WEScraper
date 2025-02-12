@@ -144,4 +144,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 This tool is for educational purposes only. Make sure to comply with MindLuster.com's terms of service and use the scraper responsibly.
 
-mzughbor, Thanks
+Your brother mzughbor, Thanks
