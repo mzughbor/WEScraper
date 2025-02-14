@@ -147,9 +147,21 @@ class MindLusterScraper {
         }
 
         // Extract description - updated selector
-        $desc_node = $xpath->query("//div[contains(@class, 'm3aarf_card')][last()]");
-        if ($desc_node->length > 0) {
-            $course_data['description'] = trim($desc_node->item(0)->textContent);
+        $desc_nodes = $xpath->query("//div[contains(@class, 'm3aarf_card')]/text()");
+        if ($desc_nodes->length > 0) {
+            // Combine all text nodes and clean up the description
+            $description = '';
+            foreach ($desc_nodes as $node) {
+                $description .= $node->nodeValue . ' ';
+            }
+            
+            // Clean up whitespace and formatting
+            $description = preg_replace('/\s+/', ' ', $description);
+            $description = trim($description);
+            
+            if (!empty($description)) {
+                $course_data['description'] = $description;
+            }
         }
 
         // Extract lessons - updated selector
