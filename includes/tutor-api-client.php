@@ -20,9 +20,9 @@ class TutorAPIClient {
     private function createCookieFile() {
         // Replace these values with what you copied from browser
         $cookies = [
-            'wordpress_logged_in_440a23810da7061fd258594d63874b6a' => 'admin%7C1739620196%7CMLwPmDwRckMgditonMvwcVA1SQLYJZItCf6YSW9kXpY%7Cf6df8490f8151eab8deeb870ea39f3570faf2932713e0fa1a59fdf06a42f0cc0', // Copy from browser
-            'wordpress_sec_440a23810da7061fd258594d63874b6a' => 'admin%7C1739620196%7CMLwPmDwRckMgditonMvwcVA1SQLYJZItCf6YSW9kXpY%7C595f3cbe22b77b07ee7f573aea9e4e4b3e1fae0cac3d34e9e02423e0b5b9c640',       // Copy from browser
-            'wp-settings-1' => 'libraryContent%3Dbrowse%26editor%3Dtinymce',       // Copy from browser
+            'wordpress_logged_in_440a23810da7061fd258594d63874b6a' => 'admin%7C1...', // Copy from browser
+            'wordpress_sec_440a23810da7061fd258594d63874b6a' => 'admin%7C1...',       // Copy from browser
+            'wp-settings-1' => 'libraryContent%3Dbrowse%26editor%3Dtinymce...',       // Copy from browser
             'wp-settings-time-1' => '1738769303'   // Copy from browser
         ];
         
